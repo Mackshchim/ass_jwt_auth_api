@@ -1,4 +1,6 @@
-# ass_jwt_auth_api
+# Apartment Swap Service's JWT authorization API
+
+The microservice aimed to authorize users in Apartment Swap Service system
 
 ***
 ##  Endpoints
