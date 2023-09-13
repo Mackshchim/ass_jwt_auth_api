@@ -1,6 +1,6 @@
 # Apartment Swap Service's JWT authorization API
 
-The microservice aimed to authorize users in Apartment Swap Service system
+The microservice aimed to authorize users in Apartment Swap Service system returning JWT Access and Refresh tokens
 
 ***
 ##  Endpoints
