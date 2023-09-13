@@ -8,6 +8,7 @@ import org.springframework.web.bind.annotation.RestController;
 import tatar.mackshchim.ass.jwtauth.DTO.AccessRefreshTokensDTO;
 import tatar.mackshchim.ass.jwtauth.DTO.LoginForm;
 import tatar.mackshchim.ass.jwtauth.controllers.api.AuthorizationAPI;
+import tatar.mackshchim.ass.jwtauth.services.AuthorizationService;
 
 
 @RestController
@@ -15,9 +16,9 @@ import tatar.mackshchim.ass.jwtauth.controllers.api.AuthorizationAPI;
 @RequiredArgsConstructor
 public class AuthorizationController implements AuthorizationAPI {
 
-    private AuthenticationService service;
+    private AuthorizationService service;
 
     public ResponseEntity<AccessRefreshTokensDTO> authorize(@RequestBody LoginForm form) {
-        return service.authorize(form.email(), form.password());
+        return ResponseEntity.ok(service.authorize(form.email(), form.password()));
     }
 }
