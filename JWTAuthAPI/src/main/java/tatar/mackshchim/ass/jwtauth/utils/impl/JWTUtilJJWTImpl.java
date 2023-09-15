@@ -16,8 +16,8 @@ import java.util.Map;
 @Component
 public class JWTUtilJJWTImpl implements JWTUtil {
 
-    public static final Date ACCESS_TOKEN_EXPIRATION_TIME = new Date(5 * 60 * 1000);    //5 minutes
-    public static final Date REFRESH_TOKEN_EXPIRATION_TIME = new Date(14 * 24 * 60 * 60 * 1000);    // 2 weeks
+    public static final int ACCESS_TOKEN_EXPIRATION_TIME = 5 * 60 * 1000;    //5 minutes
+    public static final int REFRESH_TOKEN_EXPIRATION_TIME = 14 * 24 * 60 * 60 * 1000;    // 2 weeks
     public static final SignatureAlgorithm SIGNATURE_ALGORITHM = SignatureAlgorithm.HS512;
     @Value("${jwt.secret}")
     private String SECRET_KEY;
@@ -29,11 +29,11 @@ public class JWTUtilJJWTImpl implements JWTUtil {
         claims.put("sub", user.getEmail());
 
         JwtBuilder jwtBuilder = Jwts.builder();
-        jwtBuilder.setExpiration(ACCESS_TOKEN_EXPIRATION_TIME);
+        jwtBuilder.setExpiration(new Date(System.currentTimeMillis() + ACCESS_TOKEN_EXPIRATION_TIME));
         jwtBuilder.setClaims(claims);
         String accessToken = jwtBuilder.signWith(SIGNATURE_ALGORITHM, SECRET_KEY).compact();
 
-        jwtBuilder.setExpiration(REFRESH_TOKEN_EXPIRATION_TIME);
+        jwtBuilder.setExpiration(new Date(System.currentTimeMillis() + REFRESH_TOKEN_EXPIRATION_TIME));
         String refreshToken = jwtBuilder.signWith(SIGNATURE_ALGORITHM, SECRET_KEY).compact();
 
         return new AccessRefreshTokensDTO(accessToken, refreshToken);
