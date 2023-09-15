@@ -1,7 +1,9 @@
 package tatar.mackshchim.ass.jwtauth.controllers;
 
 import lombok.RequiredArgsConstructor;
+import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -10,15 +12,17 @@ import tatar.mackshchim.ass.jwtauth.DTO.LoginForm;
 import tatar.mackshchim.ass.jwtauth.controllers.api.AuthorizationAPI;
 import tatar.mackshchim.ass.jwtauth.services.AuthorizationService;
 
-
-@RestController
 @RequestMapping("/api/auth")
+@RestController
 @RequiredArgsConstructor
 public class AuthorizationController implements AuthorizationAPI {
 
-    private AuthorizationService service;
+    private final AuthorizationService service;
 
-    public ResponseEntity<AccessRefreshTokensDTO> authorize(@RequestBody LoginForm form) {
-        return ResponseEntity.ok(service.authorize(form.email(), form.password()));
+    @PostMapping(consumes = MediaType.APPLICATION_FORM_URLENCODED_VALUE)
+    public ResponseEntity<AccessRefreshTokensDTO> authorize(LoginForm form) {
+        System.out.println(form.getEmail());
+        System.out.println(form.getPassword());
+        return ResponseEntity.ok(service.authorize(form.getEmail(), form.getPassword()));
     }
 }

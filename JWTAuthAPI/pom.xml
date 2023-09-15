@@ -67,6 +67,12 @@
         </dependency>
         <dependency>
             <groupId>io.jsonwebtoken</groupId>
+            <artifactId>jjwt-jackson</artifactId>
+            <version>${jjwt.version}</version>
+            <scope>runtime</scope>
+        </dependency>
+        <dependency>
+            <groupId>io.jsonwebtoken</groupId>
             <artifactId>jjwt-root</artifactId>
             <version>0.11.5</version>
             <type>pom</type>
