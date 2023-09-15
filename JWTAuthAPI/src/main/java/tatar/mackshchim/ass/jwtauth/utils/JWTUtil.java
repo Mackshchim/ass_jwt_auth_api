@@ -5,6 +5,6 @@ import tatar.mackshchim.ass.jwtauth.models.User;
 
 public interface JWTUtil {
 
-    AccessRefreshTokensDTO buildAccessRefreshTokens(User user);
+    AccessRefreshTokensDTO generateTokens(User user);
 
 }

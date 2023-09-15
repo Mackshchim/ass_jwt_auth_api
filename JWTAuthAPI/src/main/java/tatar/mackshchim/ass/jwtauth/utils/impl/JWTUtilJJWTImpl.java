@@ -24,7 +24,7 @@ public class JWTUtilJJWTImpl implements JWTUtil {
 
 
     @Override
-    public AccessRefreshTokensDTO buildAccessRefreshTokens(User user) {
+    public AccessRefreshTokensDTO generateTokens(User user) {
         Map<String, String> claims = new HashMap<>();
         claims.put("sub", user.getEmail());
 
@@ -35,7 +35,7 @@ public class JWTUtilJJWTImpl implements JWTUtil {
 
         jwtBuilder.setExpiration(REFRESH_TOKEN_EXPIRATION_TIME);
         String refreshToken = jwtBuilder.signWith(SIGNATURE_ALGORITHM, SECRET_KEY).compact();
-        
+
         return new AccessRefreshTokensDTO(accessToken, refreshToken);
     }
 }

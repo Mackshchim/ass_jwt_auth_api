@@ -8,6 +8,7 @@ import tatar.mackshchim.ass.jwtauth.exceptions.NotFoundException;
 import tatar.mackshchim.ass.jwtauth.exceptions.AuthorizationException;
 import tatar.mackshchim.ass.jwtauth.models.User;
 import tatar.mackshchim.ass.jwtauth.services.AuthorizationService;
+import tatar.mackshchim.ass.jwtauth.utils.JWTUtil;
 
 import java.util.Optional;
 
@@ -26,7 +27,7 @@ public class AuthorizationServiceImpl implements AuthorizationService {
         if (opt.isPresent()) {
             User user = opt.get();
             if (user.getHashPassword().equals(passwordEncoder.encode(password))) {
-                return  jwtUtil.generateTokens();
+                return  jwtUtil.generateTokens(user);
             } else {
                 throw new AuthorizationException("The password is incorrect for user with email " + email);
             }
